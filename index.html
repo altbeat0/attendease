@@ -175,12 +175,10 @@
         align-items: center;
         padding: 4px 0;             /* minimal vertical padding */
         border-bottom: 1px solid #444444bc;  /* grey divider line */
-        }
-
-        .medical-dates li:last-child {
+    }
+    .medical-dates li:last-child {
         border-bottom: none;        /* no divider after the last item */
-        }
-
+    }
     /* Increase font size for dates and cross button */
     .medical-dates li span {
       font-size: 16px;
@@ -208,34 +206,32 @@
       font-weight: 500;
     }
     /* Medical section styles */
-        .medical-toggle-btn {
-        background-color: #d6a30a;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        display: block;
-        text-transform: lowercase;
-        float: right;      /* Aligns this button to the right */
-        margin: 0 0 10px 0;
+    .medical-toggle-btn {
+      background-color: #d6a30a;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      display: block;
+      text-transform: lowercase;
+      float: right;      /* Aligns this button to the right */
+      margin: 0 0 10px 0;
     }
-
     /* New blue reset button (placed next to the toggle button) */
-        .reset-btn {
-        background-color: #007bffc5;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 14px;
-        text-transform: lowercase;
-        display: block;
-        float: left;       /* Aligns this button to the left */
-        margin: 0 0 10px 0;
+    .reset-btn {
+      background-color: #007bffc5;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      text-transform: lowercase;
+      display: block;
+      float: left;       /* Aligns this button to the left */
+      margin: 0 0 10px 0;
     }
-
     .reset-btn:hover {
       opacity: 0.9;
     }
@@ -257,37 +253,34 @@
     }
     /* Date picker and button: right aligned and lower case */
     .medical-input {
-        padding: 5px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 10px;
-        justify-content: flex-end;  /* This ensures all children align to the right */
-        }
-
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      justify-content: flex-end;  /* This ensures all children align to the right */
+    }
     .medical-input input[type="date"] {
-        padding: 4px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        text-transform: lowercase;
-        margin-bottom: 10px;  /* Removed auto margins */
-        background-color: #fff;
-        color: #000;
-        -webkit-appearance: none;
-        appearance: none;
-        }
-
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      text-transform: lowercase;
+      margin-bottom: 10px;  /* Removed auto margins */
+      background-color: #fff;
+      color: #000;
+      -webkit-appearance: none;
+      appearance: none;
+    }
     .medical-input button {
-        padding: 6px 12px;
-        border: none;
-        border-radius: 4px;
-        background-color: #d6a30a;
-        color: white;
-        cursor: pointer;
-        text-transform: lowercase;
-        margin-bottom: 10px;  /* Removed auto margins */
-        }
-
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background-color: #d6a30a;
+      color: white;
+      cursor: pointer;
+      text-transform: lowercase;
+      margin-bottom: 10px;  /* Removed auto margins */
+    }
     .marking-status {
       color: #22c55e;
       font-size: 14px;
@@ -301,24 +294,21 @@
     .marking-status .tick {
       margin-right: 4px;
     }
-
     .footer {
-        text-align: center;
-        margin: 20px;
-        padding-top: 10px;
-        border-top: 1px solid #444;
-        font-size: 14px;
-        }
-        .footer .note {
-        margin-bottom: 5px;
-        color: #c5c5c5ac;
-        line-height: 1.5;
-        }
-        .footer .developer {
-        color: #7a7a8097;
-        }
-
-
+      text-align: center;
+      margin: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #444;
+      font-size: 14px;
+    }
+    .footer .note {
+      margin-bottom: 5px;
+      color: #c5c5c5ac;
+      line-height: 1.5;
+    }
+    .footer .developer {
+      color: #7a7a8097;
+    }
     @media (display-mode: standalone) {
       body {
         padding-top: 40px;
@@ -472,34 +462,27 @@
     <div class="medical-section">
       <!-- Toggle and Reset buttons -->
       <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;">
-        
         <button class="reset-btn" onclick="resetTodayAttendance()">↺ reset</button>
         <button class="medical-toggle-btn">show medical dates</button>
-        
       </div>
       <div class="medical-dates-container" style="display: none;">
-       
         <!-- Date picker and button (right aligned) -->
         <div class="medical-input">
           <input type="date" id="medicalDateInput" />
           <button onclick="addPastMedicalDate()">add past date</button>
         </div>
-
          <!-- "After submitting" message -->
          <p id="medicalAttendanceMessage">after submitting medicals, your attendance would be: 0%</p>
-
         <div class="medical-dates">
           <ul id="medicalDatesList"></ul>
         </div>
       </div>
-      
-            <!-- Add this snippet at the bottom of your container -->
-        <div class="footer">
-            <p class="note">note: subjects can be renamed by tapping on them.</p>
-            <p class="note"> install this as an app on iOS by clicking on the "Share" button and then the "Add to homescreen" button.</p>
-            <p class="developer">developed by @umarxshaikh</p>
-        </div>
-        
+      <!-- Add this snippet at the bottom of your container -->
+      <div class="footer">
+        <p class="note">note: subjects can be renamed by tapping on them.</p>
+        <p class="note"> install this as an app on iOS by clicking on the "Share" button and then the "Add to homescreen" button.</p>
+        <p class="developer">developed by @umarxshaikh</p>
+      </div>
     </div>
   </div>
 
@@ -874,11 +857,6 @@
       }
       updateMedicalAttendanceMessage();
     }
-    
-    // Prevent touchmove default behavior to minimize page shifting on rapid taps
-    document.addEventListener('touchmove', function(e) {
-      e.preventDefault();
-    }, { passive: false });
   </script>
 </body>
 </html>
