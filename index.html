@@ -22,6 +22,10 @@
       box-sizing: border-box;
       font-family: system-ui, -apple-system, sans-serif;
     }
+    /* Remove tap highlight for buttons and inputs */
+    button, input, .btn, .attendance-btn {
+      -webkit-tap-highlight-color: transparent;
+    }
     body {
       background-color: #1a1a1a;
       color: #ffffff;
@@ -203,7 +207,7 @@
       font-size: 16px;
       font-weight: 500;
     }
-/* Medical section styles */
+    /* Medical section styles */
         .medical-toggle-btn {
         background-color: #d6a30a;
         color: white;
@@ -267,6 +271,10 @@
         border: 1px solid #ccc;
         text-transform: lowercase;
         margin-bottom: 10px;  /* Removed auto margins */
+        background-color: #fff;
+        color: #000;
+        -webkit-appearance: none;
+        appearance: none;
         }
 
     .medical-input button {
@@ -333,9 +341,9 @@
       <span id="totalLectures">total lectures: 0</span>
     </div>
     <div class="action-buttons">
-      <button class="btn btn-present" onclick="markAllPresent()">🕮 all present</button>
-      <button class="btn btn-absent" onclick="markAllAbsent()">🛏 all absent</button>
-      <button class="btn btn-medical" onclick="markMedical()">☤ mark for medical</button>
+      <button class="btn btn-present" onclick="markAllPresent()">all present</button>
+      <button class="btn btn-absent" onclick="markAllAbsent()">all absent</button>
+      <button class="btn btn-medical" onclick="markMedical()">mark for medical</button>
     </div>
     <!-- Subjects section -->
     <div class="subjects">
@@ -466,7 +474,7 @@
       <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;">
         
         <button class="reset-btn" onclick="resetTodayAttendance()">↺ reset</button>
-        <button class="medical-toggle-btn">🗓 show medical dates</button>
+        <button class="medical-toggle-btn">show medical dates</button>
         
       </div>
       <div class="medical-dates-container" style="display: none;">
@@ -535,16 +543,27 @@
       });
     }
 
+    // Helper function to prevent rapid multiple taps
+    function handleTap(button, callback) {
+      button.disabled = true;
+      callback();
+      setTimeout(() => {
+        button.disabled = false;
+      }, 300);
+    }
+
     function markAttendance(btn, status) {
-      const card = btn.closest('.subject-card');
-      const attended = card.querySelector('.attended');
-      const total = card.querySelector('.total');
-      if (status === 'present') {
-        attended.textContent = parseInt(attended.textContent) + 1;
-      }
-      total.textContent = parseInt(total.textContent) + 1;
-      updatePercentages(card);
-      showMarkingStatus(card);
+      handleTap(btn, function() {
+        const card = btn.closest('.subject-card');
+        const attended = card.querySelector('.attended');
+        const total = card.querySelector('.total');
+        if (status === 'present') {
+          attended.textContent = parseInt(attended.textContent) + 1;
+        }
+        total.textContent = parseInt(total.textContent) + 1;
+        updatePercentages(card);
+        showMarkingStatus(card);
+      });
     }
 
     function decrementAttended(btn) {
@@ -722,7 +741,7 @@
       const container = document.querySelector('.medical-dates-container');
       const isHidden = container.style.display === 'none';
       container.style.display = isHidden ? 'block' : 'none';
-      this.textContent = isHidden ? '🗓 hide medical dates' : '🗓 show medical dates';
+      this.textContent = isHidden ? 'hide medical dates' : 'show medical dates';
     });
 
     function isToday(date) {
@@ -855,6 +874,11 @@
       }
       updateMedicalAttendanceMessage();
     }
+    
+    // Prevent touchmove default behavior to minimize page shifting on rapid taps
+    document.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    }, { passive: false });
   </script>
 </body>
 </html>
