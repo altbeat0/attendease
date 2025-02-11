@@ -10,6 +10,10 @@
   <link rel="apple-touch-icon" href="https://ih1.redbubble.net/image.4984021528.7713/st,small,507x507-pad,600x600,f8f8f8.u1.jpg">
   <title>Tracker</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+  <!-- Include flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <!-- Include flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
     /* Disable overscroll and tap-zoom on iOS */
     html, body {
@@ -217,6 +221,7 @@
       text-transform: lowercase;
       float: right;      /* Aligns this button to the right */
       margin: 0 0 10px 0;
+      font-size: 14px;
     }
     /* New blue reset button (placed next to the toggle button) */
     .reset-btn {
@@ -253,7 +258,7 @@
     }
     /* Date picker and button: right aligned and lower case */
     .medical-input {
-      padding: 5px;
+      padding: 15px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -261,16 +266,16 @@
       justify-content: flex-end;  /* This ensures all children align to the right */
     }
     .medical-input input[type="date"] {
-      padding: 4px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      text-transform: lowercase;
-      margin-bottom: 10px;  /* Removed auto margins */
-      background-color: #fff;
-      color: #000;
-      -webkit-appearance: none;
-      appearance: none;
+        padding: 5px 12px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background-color: #27272a;
+        color: #ffffff;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 10px;
     }
+    
     .medical-input button {
       padding: 6px 12px;
       border: none;
@@ -468,7 +473,7 @@
       <div class="medical-dates-container" style="display: none;">
         <!-- Date picker and button (right aligned) -->
         <div class="medical-input">
-          <input type="date" id="medicalDateInput" />
+          <input type="date" id="medicalDateInput" placeholder="YYYY-MM-DD" />
           <button onclick="addPastMedicalDate()">add past date</button>
         </div>
          <!-- "After submitting" message -->
@@ -490,11 +495,13 @@
     let overallChart;
     const subjectCharts = {};
 
-    // On page load, initialize charts, load data, and set baseline attendance for today.
+    // On page load, initialize charts, load data, set baseline attendance for today,
+    // and initialize flatpickr on the medical date input.
     window.onload = function() {
       initializeCharts();
       loadData();
       setBaselineAttendanceData();
+      flatpickr("#medicalDateInput", {}); // Initialize flatpickr on the date input
     };
 
     function initializeCharts() {
